@@ -9,10 +9,10 @@ export default function CatalogPage() {
   const [stock, setStock] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Ambil data dari API
+  // Ambil data dari API backend Vercel secara langsung
   const fetchProducts = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
+      const res = await fetch('https://backend-ten-phi-17.vercel.app/api/products');
       const result = await res.json();
       if (result.success) {
         setProducts(result.data);
@@ -37,7 +37,7 @@ export default function CatalogPage() {
     setLoading(true);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
+      const res = await fetch('https://backend-ten-phi-17.vercel.app/api/products', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,8 +72,7 @@ export default function CatalogPage() {
     if (!yakin) return;
 
     try {
-      // Menggunakan query parameter ?id= untuk sesuai dengan endpoint DELETE backend
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products?id=${id}`, {
+      const res = await fetch(`https://backend-ten-phi-17.vercel.app/api/products?id=${id}`, {
         method: 'DELETE',
       });
       const resData = await res.json();
